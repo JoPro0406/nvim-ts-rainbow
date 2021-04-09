@@ -10,6 +10,7 @@ function M.init()
                                 return queries.get_query(lang, "parens") ~= nil
                         end,
                         extended_mode = true,
+                        colors = {},
                 },
         })
 end
