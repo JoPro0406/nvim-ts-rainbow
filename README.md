@@ -3,6 +3,9 @@ Rainbow parentheses for neovim using tree-sitter. Needs [nvim-treesitter](https:
 
 Tested languages - lua, java, clojure, fennel, python, css, rust, cpp. Should work with any language supported by nvim-treesitter. If any language is missing, please open an issue/PR.
 
+```
+This fork just adds the ability to change the colors of the matchs not only through hi 1 though 7 and in the file directly, but also with a key in the config.
+```
 
 ## Setup
 ```lua
@@ -10,6 +13,7 @@ require'nvim-treesitter.configs'.setup {
   rainbow = {
     enable = true,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    colors = {}, -- Add your colors here, it overwrites the default colors at each index. (If less than 7, the remaining default colors will still be used.)
   }
 }
 ```
