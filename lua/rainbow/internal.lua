@@ -7,16 +7,16 @@ local colors = require("rainbow.colors")
 local termcolors = require("rainbow.termcolors")
 local state_table = {} -- tracks which buffers have rainbow disabled
 local extended_languages = {
-        'bash',
-        'html',
-        'jsx',
-        'latex',
-        'lua',
-        'ocaml',
-        'ruby',
-        'verilog',
-        'json',
-        'yaml'
+        "bash",
+        "html",
+        "jsx",
+        "latex",
+        "lua",
+        "ocaml",
+        "ruby",
+        "verilog",
+        "json",
+        "yaml",
 }
 
 -- define highlight groups
@@ -49,7 +49,8 @@ end
 
 -- get the rainbow level nodes for a specific syntax
 local function get_rainbow_levels(bufnr, root, lang)
-        local matches = queries.get_capture_matches(bufnr, '@rainbow.level', 'rainbow', root, lang)
+        local matches =
+                queries.get_capture_matches(bufnr, "@rainbow.level", "rainbow", root, lang)
         local levels = {}
         for _, node in ipairs(matches) do
                 levels[node.node:type()] = true
@@ -71,12 +72,12 @@ local callbackfn = function(bufnr, parser)
                 local root_node = tree:root()
 
                 local lang = lang_tree:lang()
-                local query = queries.get_query(lang, 'rainbow')
+                local query = queries.get_query(lang, "rainbow")
                 local levels = get_rainbow_levels(bufnr, root_node, lang)
 
                 if query ~= nil then
                         for capture, node, _ in query:iter_captures(root_node, bufnr) do
-                                if query.captures[capture] == 'rainbow.paren' then
+                                if query.captures[capture] == "rainbow.paren" then
                                         -- set colour for this nesting level
                                         local color_no_ = color_no(node, #colors, levels)
                                         -- range of the capture, zero-indexed
