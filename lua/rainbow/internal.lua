@@ -19,19 +19,6 @@ local extended_languages = {
         "yaml",
 }
 
--- define highlight groups
-local function set_hi(colors)
-        for i = 1, #colors do
-                local s = "highlight default rainbowcol"
-                        .. i
-                        .. " guifg="
-                        .. colors[i]
-                        .. " ctermfg="
-                        .. termcolors[i]
-                vim.cmd(s)
-        end
-end
-
 -- finds the nesting level of given node
 local function color_no(mynode, len, levels)
         local counter = 0
@@ -141,15 +128,24 @@ local function merge_tables(t1, t2)
         return merged
 end
 
+-- define highlight groups
+colors = merge_tables(colors, configs.get_module("rainbow").colors)
+for i = 1, #colors do
+        local s = "highlight default rainbowcol"
+                .. i
+                .. " guifg="
+                .. colors[i]
+                .. " ctermfg="
+                .. termcolors[i]
+        vim.cmd(s)
+end
+
 local M = {}
 
 function M.attach(bufnr, lang)
         local parser = parsers.get_parser(bufnr, lang)
         local config = configs.get_module("rainbow")
         register_predicates(config)
-
-        colors = merge_tables(colors, config.colors)
-        set_hi(colors)
 
         local attachf, detachf = try_async(callbackfn, bufnr, parser)
         state_table[bufnr] = detachf
