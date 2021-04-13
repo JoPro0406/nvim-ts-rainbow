@@ -11,6 +11,7 @@ function M.init()
                         end,
                         extended_mode = true,
                         colors = {},
+                        termcolors = {},
                 },
         })
 end

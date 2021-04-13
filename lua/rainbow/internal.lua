@@ -130,6 +130,7 @@ end
 
 -- define highlight groups
 colors = merge_tables(colors, configs.get_module("rainbow").colors)
+termcolors = merge_tables(termcolors, configs.get_module("rainbow").termcolors)
 for i = 1, #colors do
         local s = "highlight default rainbowcol"
                 .. i
